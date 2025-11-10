@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Path Analyzer | Data-Powered Career Insights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --primary-dark: #4F46E5;
+            --primary-light: #8B5CF6;
+            --secondary: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --gray-light: #E5E7EB;
+            --radius: 16px;
+            --radius-lg: 24px;
+            --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 8px 12px -4px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 30px 60px -10px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            z-index: -1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg), 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3));
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3));
+        }
+
+        .subtitle {
+            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            transition: var(--transition);
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        input::placeholder {
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .help-text {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skills-group {
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius);
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .skills-group:hover {
+            border-color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .skills-title {
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .skills-title i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-checkbox {
+            margin: 0;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-checkbox:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(99, 102, 241, 0.15);
+        }
+
+        .skill-checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+        .skill-checkbox label {
+            cursor: pointer;
+            margin: 0;
+            font-weight: 500;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .skill-checkbox input[type="checkbox"]:checked + label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .skill-checkbox input[type="checkbox"]:checked + label::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .skill-checkbox input[type="checkbox"]:checked ~ .skill-checkbox {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            margin-top: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 18px 32px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--danger);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 85%;
+            animation-delay: -10s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 15%;
+            animation-delay: -7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .glass-card {
+                padding: 24px;
+            }
+            
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .skill-checkbox {
+                padding: 10px 16px;
+            }
+        }
+
+        /* Success animation */
+        @keyframes success {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-animation {
+            animation: success 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="glass-card">
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-chart-line logo-icon"></i>
+                    <div class="logo-text">CareerPath Finder</div>
+                </div>
+                <p class="subtitle">Analyze your career trajectory with cutting-edge Data-powered insights and personalized recommendations</p>
+            </div>
+            
+            <div id="error-message" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="error-text"></span>
+            </div>
+            
+            <form id="career-form">
+                <div class="form-group">
+                    <label for="name">Your Name (Optional)</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="name" name="name" placeholder="Enter your name">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sector">Industry Sector</label>
+                    <div class="input-wrapper">
+                        <select id="sector" name="sector" required onchange="updateFields()">
+                        </select>
+                        <i class="fas fa-industry input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="field">Professional Field</label>
+                    <div class="input-wrapper">
+                        <select id="field" name="field" required onchange="updateSkills()">
+                        </select>
+                        <i class="fas fa-briefcase input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="expected_salary">Expected Salary (LPA)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="expected_salary" name="expected_salary" step="0.1" min="0" required placeholder="e.g., 15.5">
+                        <i class="fas fa-money-bill-wave input-icon"></i>
+                    </div>
+                    <div class="help-text">
+                        <i class="fas fa-info-circle"></i>
+                        LPA = Lakhs Per Annum (Indian currency)
+                    </div>
+                </div>
+                
+                <div id="skills-section">
+                    <div class="skills-group">
+                        <div class="skills-title">
+                            <i class="fas fa-tools"></i>
+                            Core Skills (Required for this field)
+                        </div>
+                        <div id="core-skills" class="chips">
+                            <span class="help-text">Select sector & field to load skills</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <i class="fas fa-chart-bar"></i>
+                    Analyze Career Path
+                </button>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by CareerPath Finder • Get detailed insights into your career trajectory</p>
+        </div>
+    </div>
+
+<script>
+    // Fetch sectors and field mappings dynamically from Flask
+    let fieldMapping = {};
+
+    window.addEventListener('load', async () => {
+        await loadSectors();
+
+        // Restore any previous session data (if available)
+        try {
+            const response = await fetch('/api/session/restore');
+            if (response.ok) {
+                const sessionData = await response.json();
+                if (sessionData.sector) {
+                    document.getElementById('sector').value = sessionData.sector;
+                    await updateFields(sessionData.sector);
+                    if (sessionData.field) {
+                        document.getElementById('field').value = sessionData.field;
+                        await updateSkills(sessionData.sector, sessionData.field);
+                    }
+                    if (sessionData.name) document.getElementById('name').value = sessionData.name;
+                    if (sessionData.expected_salary) document.getElementById('expected_salary').value = sessionData.expected_salary;
+                }
+            }
+        } catch (error) {
+            console.log('No previous session found');
+        }
+    });
+
+    async function loadSectors() {
+        const sectorSelect = document.getElementById('sector');
+        sectorSelect.innerHTML = '<option value="">Loading sectors...</option>';
+
+        try {
+            const response = await fetch('/api/options');
+            const data = await response.json();
+
+            fieldMapping = data.mapping || {};
+            const sectors = data.sectors || [];
+
+            sectorSelect.innerHTML = '<option value="">Select a Sector</option>';
+            sectors.forEach(sector => {
+                const option = document.createElement('option');
+                option.value = sector;
+                option.textContent = sector;
+                sectorSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching sectors:', error);
+            sectorSelect.innerHTML = '<option value="">Error loading sectors</option>';
+        }
+    }
+
+    async function updateFields(sector = null) {
+        const selectedSector = sector || document.getElementById('sector').value;
+        const fieldSelect = document.getElementById('field');
+        const skillsContainer = document.getElementById('core-skills');
+
+        fieldSelect.innerHTML = '<option value="">Select a Field</option>';
+        skillsContainer.innerHTML = '<span class="help-text">Select a field to load skills</span>';
+
+        if (selectedSector && fieldMapping[selectedSector]) {
+            fieldMapping[selectedSector].forEach(field => {
+                const option = document.createElement('option');
+                option.value = field;
+                option.textContent = field;
+                fieldSelect.appendChild(option);
+            });
+        }
+    }
+
+    async function updateSkills(sector = null, field = null) {
+        const selectedSector = sector || document.getElementById('sector').value;
+        const selectedField = field || document.getElementById('field').value;
+        const skillsContainer = document.getElementById('core-skills');
+
+        if (selectedSector && selectedField) {
+            skillsContainer.innerHTML = '<span class="help-text">Loading skills...</span>';
+
+            try {
+                const response = await fetch(`/api/field-skills/${encodeURIComponent(selectedSector)}/${encodeURIComponent(selectedField)}`);
+                const data = await response.json();
+
+                skillsContainer.innerHTML = '';
+                if (data.field_skills && data.field_skills.length > 0) {
+                    data.field_skills.forEach(skill => {
+                        const skillChip = document.createElement('div');
+                        skillChip.className = 'skill-checkbox';
+                        const skillId = `skill-${skill.replace(/\s+/g, '-').toLowerCase()}`;
+                        skillChip.innerHTML = `
+                            <input type="checkbox" id="${skillId}" name="skills" value="${skill}">
+                            <label for="${skillId}">${skill}</label>
+                        `;
+                        skillsContainer.appendChild(skillChip);
+                    });
+                } else {
+                    skillsContainer.innerHTML = '<span class="help-text">No skill data available for this field.</span>';
+                }
+            } catch (error) {
+                console.error('Error loading skills:', error);
+                skillsContainer.innerHTML = '<span class="help-text">Error loading skills.</span>';
+            }
+        } else {
+            skillsContainer.innerHTML = '<span class="help-text">Select a field to load skills</span>';
+        }
+    }
+
+    // Form submission remains same as before
+    document.getElementById('career-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('submit-btn');
+        const errorMessage = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+
+        errorMessage.style.display = 'none';
+
+        const sector = document.getElementById('sector').value;
+        const field = document.getElementById('field').value;
+        const expectedSalary = document.getElementById('expected_salary').value;
+
+        if (!sector || !field || !expectedSalary) {
+            showError('Please fill in all required fields');
+            return;
+        }
+
+        const selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked'))
+            .map(checkbox => checkbox.value);
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span> Analyzing...';
+
+        try {
+            const formData = {
+                name: document.getElementById('name').value,
+                sector,
+                field,
+                expected_salary: parseFloat(expectedSalary),
+                skills: selectedSkills
+            };
+
+            const response = await fetch('/api/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Analysis Complete!';
+                setTimeout(() => {
+                    window.location.href = result.redirect;
+                }, 1000);
+            } else {
+                showError(result.error || 'Analysis failed.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-chart-bar"></i> Analyze Career Path';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showError('Network error. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-chart-bar"></i> Analyze Career Path';
+        }
+    });
+
+    function showError(message) {
+        const errorMessage = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+        errorText.textContent = message;
+        errorMessage.style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>

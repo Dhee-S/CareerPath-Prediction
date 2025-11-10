@@ -1,0 +1,2 @@
+career-env-311\Scripts\activate
+
