@@ -23,11 +23,11 @@ like my **Career Prediction App**, which helps users discover the right career p
 
 | Category | Tools & Technologies |
 |-----------|----------------------|
-| 💻 **Languages** | Python, C++, JavaScript |
+| 💻 **Languages** | Python, JavaScript |
 | 🧩 **Frameworks** | Flask, FastAPI, React.js |
-| 📊 **Libraries** | Pandas, NumPy, Scikit-Learn, TensorFlow |
-| ⚙️ **Tools** | Docker, GitHub, Firebase, VS Code |
-| ☁️ **Platforms** | Render, Railway, GitHub Pages |
+| 📊 **Libraries** | Pandas, NumPy, Scikit-Learn |
+| ⚙️ **Tools** | Docker, GitHub, VS Code |
+| ☁️ **Platforms** | GitHub Pages |
 
 ---
 
@@ -72,3 +72,4 @@ Let’s collaborate, innovate, and bring ideas to life 🚀
 ---
 
 🪄 *“Code is more than syntax — it’s how we translate imagination into something that changes the world.”*
+
