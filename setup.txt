@@ -20,6 +20,7 @@ cycler==0.12.1
 debugpy==1.8.16
 decorator==5.2.1
 defusedxml==0.7.1
+docker==7.1.0
 entrypoints==0.4
 executing==2.2.0
 fastjsonschema==2.21.2
@@ -88,8 +89,6 @@ pyparsing==3.0.9
 python-dateutil==2.9.0.post0
 python-json-logger==3.3.0
 pytz==2025.2
-pywin32==311
-pywinpty==3.0.0
 PyYAML==6.0.2
 pyzmq==24.0.1
 referencing==0.36.2
