@@ -1,38 +1,38 @@
 # 🎓 **Career Prediction App**
 
-An intelligent **Machine Learning–powered web application** that helps users discover suitable career paths based on their **skills, interests, and academic background**.
-Designed to be simple, fast, and accessible — anyone can check their career scope instantly.
+A smart **data-driven web application** that predicts suitable career paths by comparing user-entered skills, interests, and subject choices with **previous years’ career trend data**.
+Instead of machine learning, the system uses **pattern matching and rule-based logic** to generate personalized recommendations.
 
 ---
 
 ## 🚀 **Features**
 
-* 🎯 **Career Recommendation Engine**
-  Predicts the best-fitting career fields with a trained ML classification model.
+* 📘 **Trend-Based Career Prediction**
+  Matches user inputs with past career trend datasets to suggest suitable career paths.
 
-* 🖥️ **Clean, User-Friendly Web Interface**
-  Built with Flask for smooth and intuitive interaction.
+* 📊 **Career Trend Visualizations**
+  Displays charts that show how various career domains performed over the years.
 
-* 📊 **Visual Insights**
-  Generates trend visualizations and career distribution charts using Plotly & Matplotlib.
+* 🖥️ **Simple & Interactive Web UI**
+  Users can instantly explore their potential career fields.
 
-* 🤖 **ML-Powered Predictions**
-  Uses Scikit-Learn to process inputs and classify suitable career paths.
+* 📂 **Dataset-Driven Decision Engine**
+  The logic relies purely on predefined datasets and comparison algorithms .
 
 * ☁️ **Hosted Online**
-  Fully deployed using Docker + Render so anyone can access it anytime.
+  Fully deployed on Render using Flask + Docker.
 
 ---
 
-## 🧠 **Tech Stack**
+## 🔧 **Tech Stack**
 
-| Category        | Tools                       |
-| --------------- | --------------------------- |
-| Backend         | Flask                       |
-| ML Model        | Scikit-Learn, Pandas, NumPy |
-| Visualization   | Plotly, Matplotlib          |
-| Deployment      | Docker, Render              |
-| Version Control | GitHub                      |
+| Category      | Tools                                  |
+| ------------- | -------------------------------------- |
+| Backend       | Flask                                  |
+| Logic         | Rule-Based Comparison, Dataset Mapping |
+| Visualization | Plotly, Matplotlib                     |
+| Deployment    | Docker, Render                         |
+| UI            | HTML, CSS (Flask templates)            |
 
 ---
 
@@ -50,30 +50,31 @@ Designed to be simple, fast, and accessible — anyone can check their career sc
 
 ## 📘 **How It Works**
 
-1. User enters **skills, interests, strengths, and academic details**
-2. Model processes and transforms inputs
-3. ML classifier predicts suitable career categories
-4. Visualization charts are displayed to help users explore trends
-5. Final recommended career paths are shown instantly
+1. User enters **skills, interests, Skills, preferences**
+2. App compares inputs with **historical datasets** stored in CSV/JSON
+3. A rule engine finds the closest matching career fields
+4. Trend graphs show how these careers evolved over previous years
+5. App returns **Recommands career scope in future years**
 
 ---
 
-## 📦 **Key Files**
+## 📦 **Project Structure**
 
 ```
 CareerPath-Prediction/
 │── app.py                # Flask backend
-│── model.pkl             # Trained ML model
-│── templates/            # HTML UI
+│── data/                 # Past year career datasets
+│── templates/            # HTML UI pages
 │── static/               # CSS & JS
-│── requirements.txt       # Dependencies
-│── Dockerfile             # Container config
-│── render.yaml            # Render deployment config
+│── Analysis/             # Rule-based comparison logic
+│── requirements.txt
+│── Dockerfile
+│── render.yaml
 ```
 
 ---
 
-## 🔮 *Built to guide, inspire, and support smart career choices.*
+## 🔮 *Designed to help students explore career possibilities using real-world trend data.*
 
 ---
 
